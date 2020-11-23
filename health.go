@@ -18,8 +18,16 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/trademasterbr/go-integra/config"
+	"github.com/intorch/config"
 )
+
+//Conf struct to parse configuration
+type Conf struct {
+	Route string
+	Addr  string
+}
+
+const healthComponent config.Component = "health"
 
 //Status data structure to Health
 type Status struct {
@@ -44,9 +52,14 @@ func (st *Status) handleRequest(w http.ResponseWriter, r *http.Request) {
 //Start init the healthcheck service that enable the health endpoint. The endpoint and
 //port, both are provided by service configuration with 'conf.Health.Route' and
 //'conf.Health.Addr' respectivelly
-func (st *Status) Start(conf *config.Configuration) {
-	http.HandleFunc(conf.Health.Route, st.handleRequest)
-	err := http.ListenAndServe(conf.Health.Addr, nil)
+func (st *Status) Start(conf *config.Configuration, taskName string) {
+	var health Conf
+
+	item := conf.Get(taskName, healthComponent)
+	item.Decode(&health)
+
+	http.HandleFunc(health.Route, st.handleRequest)
+	err := http.ListenAndServe(health.Addr, nil)
 
 	print(err)
 }

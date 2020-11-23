@@ -20,8 +20,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/intorch/config"
 	"github.com/stretchr/testify/assert"
-	"github.com/trademasterbr/go-integra/config"
 )
 
 const healthURL string = "http://localhost:3000/health"
@@ -42,17 +42,26 @@ func TestNew(t *testing.T) {
 
 func startServer() *Status {
 	if !serverUp {
-		c := &config.Configuration{
-			Health: &config.Health{
-				Addr:  ":3000",
-				Route: "/health",
-			},
-		}
+
+		var jsonBody string = `{
+			"docs": [
+				{
+					"name": "test", 
+					"type": "health", 
+					"data": {
+						"route": "/health", 
+						"addr": ":3000"
+					}
+				}
+			]
+		}`
+
+		c := config.New([]byte(jsonBody))
 
 		status = New()
 
 		go func() {
-			status.Start(c)
+			status.Start(c, "test")
 		}()
 
 		serverUp = true
