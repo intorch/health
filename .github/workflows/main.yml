@@ -33,6 +33,7 @@ jobs:
       # Coverage report
       - name: Generate Coverage report
         run: |
+          go get -t -v
           go test -coverprofile=coverage.out
       - name: Codacy Coverage Reporter
         # You may pin to the exact commit or the version.
