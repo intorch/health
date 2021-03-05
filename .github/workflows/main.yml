@@ -39,7 +39,7 @@ jobs:
       # Coverage report
       - name: Generate coverage report
         run: |
-          go test `go list ./...` -coverprofile=coverage.out -covermode=atomic
+          go test -coverprofile=coverage.out -covermode=atomic
 
       - name: Codacy Coverage Reporter
         # You may pin to the exact commit or the version.
