@@ -27,8 +27,8 @@ import (
 const healthURL string = "http://localhost:3000/health"
 
 var (
-	serverUp bool    = false
-	status   *Status = nil
+	serverUp = false
+	status   *Status
 )
 
 func TestNew(t *testing.T) {
@@ -43,7 +43,7 @@ func TestNew(t *testing.T) {
 func startServer() *Status {
 	if !serverUp {
 
-		var jsonBody string = `{
+		var jsonBody = `{
 			"docs": [
 				{
 					"name": "test", 
