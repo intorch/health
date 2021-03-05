@@ -22,6 +22,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # install go 
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15.x
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # Coverage report
       - name: Generate Coverage report
         run: |
           go test -coverprofile=coverage.out
@@ -33,4 +42,4 @@ jobs:
           # Project token for the Codacy project you want to send coverage information
           project-token: ${{ secrets.CODACY_TOKEN }}
           # Optional comma separated list of coverage reports to send to Codacy
-          #coverage-reports: # optional, default is 
+          coverage-reports: coverage.out
