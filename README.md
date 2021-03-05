@@ -1,4 +1,4 @@
-# Health check Library
+# Simple Health check Library
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/92f3375a8d1045fcb631fb027a8468eb)](https://app.codacy.com/gh/intorch/health?utm_source=github.com&utm_medium=referral&utm_content=intorch/health&utm_campaign=Badge_Grade_Settings)
 
