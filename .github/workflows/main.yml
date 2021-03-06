@@ -40,13 +40,17 @@ jobs:
       - name: Generate coverage report
         run: |
           go test -race -coverprofile=coverage.out -covermode=atomic
+          ls
+          pwd
 
-      - name: Codacy Coverage Reporter
-        # You may pin to the exact commit or the version.
-        # uses: codacy/codacy-coverage-reporter-action@53ebfe140c89720a8234b8ea4fabaf6de5736092
-        uses: codacy/codacy-coverage-reporter-action@0.2.0
-        with:
-          # Project token for the Codacy project you want to send coverage information
-          project-token: ${{ secrets.CODACY_TOKEN }}
-          # Optional comma separated list of coverage reports to send to Codacy
-          coverage-reports: coverage.out
+      # - name: Codacy Coverage Reporter
+      #   uses: codacy/codacy-coverage-reporter-action@0.2.0
+      #   with:
+      #     project-token: ${{ secrets.CODACY_TOKEN }}
+      #     coverage-reports: cobertura.xml
+
+      - name: codacy
+        image: plugins/codacy
+        settings:
+          token:
+            from_secret: ${{ secrets.CODACY_TOKEN }}
