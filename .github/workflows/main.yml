@@ -43,14 +43,14 @@ jobs:
           ls
           pwd
 
-      # - name: Codacy Coverage Reporter
-      #   uses: codacy/codacy-coverage-reporter-action@0.2.0
-      #   with:
-      #     project-token: ${{ secrets.CODACY_TOKEN }}
-      #     coverage-reports: cobertura.xml
+      - name: Codacy Coverage Reporter
+        uses: codacy/codacy-coverage-reporter-action@0.2.0
+        with:
+          project-token: ${{ secrets.CODACY_TOKEN }}
+          coverage-reports: **/*.out
 
-      - name: codacy
-        image: plugins/codacy
-        settings:
-          token:
-            from_secret: ${{ secrets.CODACY_TOKEN }}
+      # - name: codacy
+      #   image: plugins/codacy
+      #   settings:
+      #     token:
+      #       from_secret: ${{ secrets.CODACY_TOKEN }}
